@@ -1,6 +1,6 @@
 # Universal Account Tutorial
 
-This tutorial demonstrates how to integrate Particle Network's Universal Accounts into your dApp.
+This tutorial demonstrates how to integrate Particle Network's Universal Accounts into your dApp. Universal Accounts provide a seamless cross-chain experience by abstracting away the complexity of managing multiple chain-specific accounts.
 
 ## Features
 
@@ -13,14 +13,26 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
    - Configure account settings
 
 3. **Account Information**
-   - View EVM address
-   - View Solana address
-   - Check account unified balance
+   - View EVM Smart Account address
+   - View Solana Smart Account address
+   - Check account balances across chains
 
 4. **Cross-Chain Transactions**
    - Execute a simple BNB purchase
    - Handle transaction states and errors
    - View transaction details
+
+## Project Structure
+
+```
+app/
+├── components/           # Reusable UI components
+│   ├── WalletConnection  # Wallet connection handling
+│   ├── AccountInfo       # Account details display
+│   └── TransactionSection# Transaction UI and logic
+├── page.tsx             # Main tutorial page
+└── types/               # TypeScript definitions
+```
 
 ## Getting Started
 
@@ -44,6 +56,8 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
    yarn dev
    ```
 
+4. Open [http://localhost:3000](http://localhost:3000) to view the tutorial.
+
 ## Learning Steps
 
 1. **Connect Wallet**
@@ -62,4 +76,15 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
    - Users can initiate a simple BNB purchase
    - Transaction progress and results are clearly displayed
 
-Check the guide on the [Particle Docs](https://docs.particle.network/overview/universal-accounts).
+## Important Notes
+
+- This is a testnet application
+- Make sure you have MetaMask installed
+- The app uses Particle Network's Universal Account SDK
+- All transactions are simulated with small amounts
+
+## Resources
+
+- [Particle Network Documentation](https://docs.particle.network)
+- [Universal Accounts Overview](https://docs.particle.network/overview/universal-accounts)
+- [Next.js Documentation](https://nextjs.org/docs)
