@@ -24,31 +24,31 @@ export function TransactionSection({
       <button
         onClick={onBuyClick}
         disabled={isTransferring}
-        className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg font-semibold
-                 hover:from-green-600 hover:to-emerald-700 transition-all duration-200 ease-in-out
-                 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg w-full"
+        className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium
+                 hover:bg-green-700 transition-all duration-200 ease-in-out
+                 disabled:opacity-50 disabled:cursor-not-allowed w-full"
       >
         {isTransferring ? "Processing Transaction..." : "Buy BNB ($0.1)"}
       </button>
 
       {transactionError && (
-        <div className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-300 text-sm">
+        <div className="p-4 bg-red-900/30 border border-red-800 rounded-lg text-red-400 text-sm">
           {transactionError}
         </div>
       )}
 
       {transactionUrl && !transactionError && (
-        <div className="space-y-2">
-          <div className="text-green-400 font-semibold">
+        <div className="p-4 bg-green-900/30 border border-green-800 rounded-lg">
+          <div className="text-green-400 font-medium text-sm mb-2">
             Transaction Submitted!
           </div>
           <a
             href={transactionUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 underline text-sm"
+            className="text-blue-400 hover:text-blue-300 text-sm font-medium"
           >
-            View Transaction Details
+            View Transaction Details →
           </a>
         </div>
       )}

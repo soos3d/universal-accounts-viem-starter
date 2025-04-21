@@ -6,6 +6,7 @@ import {
   UniversalAccount,
   IAssetsResponse,
   CHAIN_ID,
+  SUPPORTED_PRIMARY_TOKENS,
 } from "@GDdark/universal-account";
 
 // Components
@@ -43,6 +44,11 @@ export default function Home() {
   const [isTransferring, setIsTransferring] = useState<boolean>(false);
   const [transactionUrl, setTransactionUrl] = useState<string>("");
   const [transactionError, setTransactionError] = useState<string>("");
+
+  console.log(
+    "Supported primary tokens:",
+    JSON.stringify(SUPPORTED_PRIMARY_TOKENS, null, 2)
+  );
 
   /**
    * Step 1: Connect Wallet
@@ -191,19 +197,19 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-900">
+      <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <div className="text-center mb-12">
+            <h1 className="text-3xl font-semibold text-white">
               Universal Account Tutorial
             </h1>
-            <p className="mt-2 text-gray-400">
+            <p className="mt-3 text-gray-400">
               Learn how to use Particle Network&apos;s Universal Accounts
             </p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* Step 1: Wallet Connection */}
             <WalletConnection
               walletAddress={walletAddress}

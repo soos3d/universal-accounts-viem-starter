@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "echo \"@GDdark:registry=https://npm.pkg.github.com/\\n//npm.pkg.github.com/:_authToken=${NPM_TOKEN}\" > .npmrc"
   },
   "dependencies": {
     "@GDdark/universal-account": "^1.0.10",

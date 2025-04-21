@@ -20,11 +20,11 @@ export function AccountInfo({ accountInfo, primaryAssets }: AccountInfoProps) {
   return (
     <div className="space-y-6">
       {primaryAssets && (
-        <div className="p-4 bg-gray-800/30 rounded-xl space-y-2 backdrop-blur-sm border border-emerald-500/20">
-          <h4 className="text-lg font-semibold text-emerald-300">
+        <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-800">
+          <h4 className="text-sm font-medium text-blue-300 mb-2">
             Universal Account Balance
           </h4>
-          <div className="p-3 bg-gray-900/50 rounded-lg font-mono text-2xl font-bold text-center text-emerald-400">
+          <div className="font-mono text-2xl font-semibold text-blue-400">
             ${Number(primaryAssets?.totalAmountInUSD || 0).toFixed(3)}
           </div>
         </div>
@@ -32,21 +32,21 @@ export function AccountInfo({ accountInfo, primaryAssets }: AccountInfoProps) {
 
       <div className="grid grid-cols-1 gap-4">
         {/* EVM Smart Account */}
-        <div className="p-4 bg-gray-800/30 rounded-xl space-y-2 backdrop-blur-sm border border-purple-500/20">
-          <div className="flex items-center space-x-2">
-            <h4 className="text-lg font-semibold text-purple-300">EVM</h4>
+        <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
+          <div className="mb-2">
+            <h4 className="text-sm font-medium text-gray-300">EVM Address</h4>
           </div>
-          <div className="p-3 bg-gray-900/50 rounded-lg break-all font-mono text-sm">
+          <div className="font-mono text-sm text-gray-200 break-all">
             {accountInfo.evmSmartAccount}
           </div>
         </div>
 
         {/* Solana Smart Account */}
-        <div className="p-4 bg-gray-800/30 rounded-xl space-y-2 backdrop-blur-sm border border-pink-500/20">
-          <div className="flex items-center space-x-2">
-            <h4 className="text-lg font-semibold text-pink-300">Solana</h4>
+        <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
+          <div className="mb-2">
+            <h4 className="text-sm font-medium text-gray-300">Solana Address</h4>
           </div>
-          <div className="p-3 bg-gray-900/50 rounded-lg break-all font-mono text-sm">
+          <div className="font-mono text-sm text-gray-200 break-all">
             {accountInfo.solanaSmartAccount}
           </div>
         </div>
