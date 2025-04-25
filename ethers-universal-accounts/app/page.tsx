@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ethers } from "ethers";
+import { ethers, formatUnits } from "ethers";
 import {
   UniversalAccount,
   IAssetsResponse,
@@ -44,11 +44,8 @@ export default function Home() {
   const [isTransferring, setIsTransferring] = useState<boolean>(false);
   const [transactionUrl, setTransactionUrl] = useState<string>("");
   const [transactionError, setTransactionError] = useState<string>("");
-
-  console.log(
-    "Supported primary tokens:",
-    JSON.stringify(SUPPORTED_PRIMARY_TOKENS, null, 2)
-  );
+  const [feeDetails, setFeeDetails] = useState<any>(null);
+  const [showFeePreview, setShowFeePreview] = useState<boolean>(false);
 
   /**
    * Step 1: Connect Wallet
@@ -85,6 +82,8 @@ export default function Home() {
     setAccountInfo(null);
     setTransactionUrl("");
     setTransactionError("");
+    setFeeDetails(null);
+    setShowFeePreview(false);
   };
 
   /**
@@ -152,9 +151,12 @@ export default function Home() {
     if (!universalAccount) return;
 
     try {
+      // Reset states for new transaction
       setIsTransferring(true);
       setTransactionError("");
       setTransactionUrl("");
+      setFeeDetails(null);
+      setShowFeePreview(true);
 
       // Create and execute the buy transaction
       const transaction = await universalAccount.createBuyTransaction({
@@ -201,10 +203,10 @@ export default function Home() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-3xl font-semibold text-white">
+            <h1 className="text-4xl font-bold text-white mb-2">
               Universal Account Tutorial
             </h1>
-            <p className="mt-3 text-gray-400">
+            <p className="text-lg text-gray-400">
               Learn how to use Particle Network&apos;s Universal Accounts
             </p>
           </div>
@@ -234,6 +236,8 @@ export default function Home() {
                 transactionError={transactionError}
                 transactionUrl={transactionUrl}
                 onBuyClick={handleBuyTransaction}
+                feeDetails={feeDetails}
+                showFeePreview={showFeePreview}
               />
             )}
           </div>

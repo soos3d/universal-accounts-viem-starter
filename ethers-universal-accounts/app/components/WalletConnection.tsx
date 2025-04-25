@@ -1,5 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { ethers } from "ethers";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface WalletConnectionProps {
   walletAddress: string;
@@ -53,34 +55,29 @@ export function WalletConnection({
   return (
     <div className="space-y-4">
       {!walletAddress ? (
-        <button
-          onClick={onConnect}
-          disabled={isConnecting}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium
-                   hover:bg-blue-700 transition-all duration-200 ease-in-out
-                   disabled:opacity-50 disabled:cursor-not-allowed w-full"
-        >
+        <Button onClick={onConnect} disabled={isConnecting} className="w-full">
           {isConnecting ? "Connecting..." : "Connect Wallet"}
-        </button>
+        </Button>
       ) : (
         <div className="space-y-4">
-          <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
-            <div className="mb-2">
-              <h4 className="text-sm font-medium text-gray-300">
-                Connected Wallet
-              </h4>
-            </div>
-            <div className="font-mono text-sm text-gray-200 break-all">
-              {walletAddress}
-            </div>
-          </div>
-          <button
+          <Card className="border-gray-700 bg-gray-800">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-gray-300">
+                Connected EOA
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="font-mono text-sm text-gray-200 break-all">
+                {walletAddress}
+              </div>
+            </CardContent>
+          </Card>
+          <Button
             onClick={onDisconnect}
-            className="px-6 py-3 bg-gray-800 text-gray-300 rounded-lg font-medium
-                     hover:bg-gray-700 transition-all duration-200 ease-in-out w-full"
+            className="w-full bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
           >
             Disconnect Wallet
-          </button>
+          </Button>
         </div>
       )}
     </div>
