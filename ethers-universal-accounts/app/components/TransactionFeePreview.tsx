@@ -1,4 +1,9 @@
+"use client";
+
 import { formatUnits } from "ethers";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 export interface TransactionFeeDetails {
   feeTokenAmountInUSD: bigint;
@@ -22,41 +27,49 @@ export function TransactionFeePreview({
 }: TransactionFeePreviewProps) {
   if (!isVisible || !feeDetails) return null;
 
+  // Format fee values to fixed decimals for better readability
+  const formatFee = (value: bigint) => {
+    return parseFloat(formatUnits(value, 18)).toFixed(4);
+  };
+
   return (
-    <div className="bg-gray-800 rounded-lg p-4 border border-gray-700 mb-4">
-      <h3 className="text-gray-300 font-medium mb-3 text-sm">Transaction Fee Preview</h3>
-      
-      <div className="space-y-2">
+    <Card className="bg-gray-800 border-gray-700 mb-4">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium text-gray-300">
+          Transaction Fee Preview
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3 pt-0">
         <div className="flex justify-between items-center">
           <span className="text-gray-400 text-xs">Total Fee</span>
-          <span className="text-white font-medium">
-            ${formatUnits(feeDetails.feeTokenAmountInUSD, 18)}
-          </span>
+          <Badge variant="outline" className="text-white bg-gray-700/50 font-medium">
+            ${formatFee(feeDetails.feeTokenAmountInUSD)}
+          </Badge>
         </div>
-        
-        <div className="h-px bg-gray-700 my-2"></div>
-        
+
+        <Separator className="bg-gray-700" />
+
         <div className="flex justify-between items-center">
           <span className="text-gray-400 text-xs">Gas Fee</span>
-          <span className="text-gray-300 text-sm">
-            ${formatUnits(feeDetails.gasFeeTokenAmountInUSD, 18)}
+          <span className="text-gray-300 text-xs">
+            ${formatFee(feeDetails.gasFeeTokenAmountInUSD)}
           </span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-400 text-xs">Service Fee</span>
-          <span className="text-gray-300 text-sm">
-            ${formatUnits(feeDetails.transactionServiceFeeTokenAmountInUSD, 18)}
+          <span className="text-gray-300 text-xs">
+            ${formatFee(feeDetails.transactionServiceFeeTokenAmountInUSD)}
           </span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-400 text-xs">LP Fee</span>
-          <span className="text-gray-300 text-sm">
-            ${formatUnits(feeDetails.transactionLPFeeTokenAmountInUSD, 18)}
+          <span className="text-gray-300 text-xs">
+            ${formatFee(feeDetails.transactionLPFeeTokenAmountInUSD)}
           </span>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -65,7 +65,7 @@ export function AccountInfo({ accountInfo, primaryAssets }: AccountInfoProps) {
         <Card className="bg-gray-800 border-gray-700">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-gray-300">
-              EVM Address
+              EVM Universal Account
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -79,7 +79,7 @@ export function AccountInfo({ accountInfo, primaryAssets }: AccountInfoProps) {
         <Card className="bg-gray-800 border-gray-700">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-gray-300">
-              Solana Address
+              Solana Universal Account
             </CardTitle>
           </CardHeader>
           <CardContent>

@@ -46,6 +46,8 @@ export default function Home() {
   const [transactionError, setTransactionError] = useState<string>("");
   const [feeDetails, setFeeDetails] = useState<any>(null);
   const [showFeePreview, setShowFeePreview] = useState<boolean>(false);
+  const [isPreparing, setIsPreparing] = useState<boolean>(false);
+  const [pendingTransaction, setPendingTransaction] = useState<any>(null);
 
   /**
    * Step 1: Connect Wallet
@@ -84,6 +86,8 @@ export default function Home() {
     setTransactionError("");
     setFeeDetails(null);
     setShowFeePreview(false);
+    setIsPreparing(false);
+    setPendingTransaction(null);
   };
 
   /**
@@ -144,39 +148,91 @@ export default function Home() {
   }, [universalAccount, walletAddress, fetchSmartAccountAddresses]);
 
   /**
-   * Handle a simple buy transaction using the Universal Account.
-   * This demonstrates cross-chain transactions and account abstraction capabilities.
+   * Prepare and show transaction fee preview
+   * Step 1: Create the transaction and display fee preview
    */
-  const handleBuyTransaction = async () => {
+  const handlePrepareTransaction = async () => {
     if (!universalAccount) return;
 
     try {
       // Reset states for new transaction
-      setIsTransferring(true);
+      setIsPreparing(true);
       setTransactionError("");
       setTransactionUrl("");
       setFeeDetails(null);
-      setShowFeePreview(true);
+      setShowFeePreview(false);
 
-      // Create and execute the buy transaction
+      // Create and prepare the buy transaction
       const transaction = await universalAccount.createBuyTransaction({
         token: {
           chainId: CHAIN_ID.BSC_MAINNET,
-          address: "0x0000000000000000000000000000000000000000", // Native BNB
+          address: "0x59264f02D301281f3393e1385c0aEFd446Eb0F00", // $PARTI token on BNB
         },
-        amountInUSD: "0.1",
+        amountInUSD: "1",
       });
+
+      console.log("Transaction created:", JSON.stringify(transaction, null, 2));
+
+      // Save the transaction for later execution
+      setPendingTransaction(transaction);
+
+      // Extract fee details
+      const feeQuote = transaction.feeQuotes[0];
+      const fee = feeQuote.fees.totals;
+
+      // Store fee details in state for display in the UI
+      setFeeDetails({
+        feeTokenAmountInUSD: fee.feeTokenAmountInUSD,
+        gasFeeTokenAmountInUSD: fee.gasFeeTokenAmountInUSD,
+        transactionServiceFeeTokenAmountInUSD:
+          fee.transactionServiceFeeTokenAmountInUSD,
+        transactionLPFeeTokenAmountInUSD: fee.transactionLPFeeTokenAmountInUSD,
+      });
+
+      // Show the fee preview
+      setShowFeePreview(true);
+    } catch (error) {
+      console.error("Error preparing transaction:", error);
+      setTransactionError(
+        error instanceof Error ? error.message : "Unknown error occurred"
+      );
+    } finally {
+      setIsPreparing(false);
+    }
+  };
+
+  /**
+   * Cancel the transaction
+   * Clear all states and return to initial state
+   */
+  const handleCancelTransaction = () => {
+    setShowFeePreview(false);
+    setPendingTransaction(null);
+    setFeeDetails(null);
+    setTransactionError("");
+  };
+
+  /**
+   * Execute the prepared transaction
+   * Step 2: Sign and send the prepared transaction
+   */
+  const handleContinueTransaction = async () => {
+    if (!universalAccount || !pendingTransaction) return;
+
+    try {
+      setIsTransferring(true);
 
       if (!window.ethereum) {
         throw new Error("MetaMask not found");
       }
 
+      // Sign and send the prepared transaction
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const signature = await signer.signMessage(transaction.rootHash);
+      const signature = await signer.signMessage(pendingTransaction.rootHash);
 
       const result = await universalAccount.sendTransaction(
-        transaction,
+        pendingTransaction,
         signature
       );
       console.log("Transaction sent:", result);
@@ -184,6 +240,10 @@ export default function Home() {
       setTransactionUrl(
         `https://universalx.app/activity/details?id=${result.transactionId}`
       );
+
+      // Hide the fee preview after successful transaction
+      setShowFeePreview(false);
+      setPendingTransaction(null);
 
       // Refresh balances after transaction
       const assets = await universalAccount.getPrimaryAssets();
@@ -235,9 +295,12 @@ export default function Home() {
                 isTransferring={isTransferring}
                 transactionError={transactionError}
                 transactionUrl={transactionUrl}
-                onBuyClick={handleBuyTransaction}
+                onBuyClick={handlePrepareTransaction}
+                onContinueTransaction={handleContinueTransaction}
+                onCancelTransaction={handleCancelTransaction}
                 feeDetails={feeDetails}
                 showFeePreview={showFeePreview}
+                isPreparing={isPreparing}
               />
             )}
           </div>
