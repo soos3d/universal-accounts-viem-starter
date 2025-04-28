@@ -70,7 +70,7 @@ export function TransactionSection({
           disabled={isPreparing || isTransferring}
           className="w-full bg-green-600 hover:bg-green-700"
         >
-          {isPreparing ? "Calculating Fees..." : "Buy $PARTI ($1)"}
+          {isPreparing ? "Calculating Fees..." : "Get 1 USDT on Avalanche"}
         </Button>
       )}
 

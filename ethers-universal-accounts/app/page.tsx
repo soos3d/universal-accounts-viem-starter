@@ -6,7 +6,7 @@ import {
   UniversalAccount,
   IAssetsResponse,
   CHAIN_ID,
-  SUPPORTED_PRIMARY_TOKENS,
+  SUPPORTED_TOKEN_TYPE,
 } from "@GDdark/universal-account";
 
 // Components
@@ -163,12 +163,15 @@ export default function Home() {
       setShowFeePreview(false);
 
       // Create and prepare the buy transaction
-      const transaction = await universalAccount.createBuyTransaction({
-        token: {
-          chainId: CHAIN_ID.BSC_MAINNET,
-          address: "0x59264f02D301281f3393e1385c0aEFd446Eb0F00", // $PARTI token on BNB
-        },
-        amountInUSD: "1",
+      const transaction = await universalAccount.createUniversalTransaction({
+        chainId: CHAIN_ID.AVALANCHE_MAINNET,
+        expectTokens: [
+          {
+            type: SUPPORTED_TOKEN_TYPE.USDT,
+            amount: "1",
+          },
+        ],
+        transactions: [],
       });
 
       console.log("Transaction created:", JSON.stringify(transaction, null, 2));
