@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ethers, formatUnits } from "ethers";
+import { ethers, getBytes } from "ethers";
 import {
   UniversalAccount,
   IAssetsResponse,
@@ -232,7 +232,9 @@ export default function Home() {
       // Sign and send the prepared transaction
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const signature = await signer.signMessage(pendingTransaction.rootHash);
+      const signature = await signer.signMessage(
+        getBytes(pendingTransaction.rootHash)
+      );
 
       const result = await universalAccount.sendTransaction(
         pendingTransaction,
