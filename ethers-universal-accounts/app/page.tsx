@@ -7,7 +7,7 @@ import {
   IAssetsResponse,
   CHAIN_ID,
   SUPPORTED_TOKEN_TYPE,
-} from "@GDdark/universal-account";
+} from "@particle-network/universal-account-sdk";
 
 // Components
 import { WalletConnection } from "./components/WalletConnection";
