@@ -2,6 +2,8 @@
 
 This tutorial demonstrates how to integrate Particle Network's Universal Accounts into your dApp. Universal Accounts provide a seamless cross-chain experience by abstracting away the complexity of managing multiple chain-specific accounts.
 
+> Find a full breakdown the [How-to guide](https://developers.particle.network/universal-accounts/cha/how-to/provider).
+
 ## Features
 
 1. **Wallet Connection**
@@ -18,21 +20,9 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
    - Check account balances across chains
 
 4. **Cross-Chain Transactions**
-   - Execute a simple BNB purchase
+   - Execute a simple USDT purchase
    - Handle transaction states and errors
    - View transaction details
-
-## Project Structure
-
-```
-app/
-├── components/           # Reusable UI components
-│   ├── WalletConnection  # Wallet connection handling
-│   ├── AccountInfo       # Account details display
-│   └── TransactionSection# Transaction UI and logic
-├── page.tsx             # Main tutorial page
-└── types/               # TypeScript definitions
-```
 
 ## Getting Started
 
@@ -44,9 +34,15 @@ app/
    ```
 
 2. Configure environment variables:
-   Create a `.env.local` file:
-   ```
-   NEXT_PUBLIC_UA_PROJECT_ID=your_project_id
+
+   First, create a project in the [Particle Dashboard](https://dashboard.particle.network/) to get the required credentials.
+
+   Create a .env file in the root of the ethers-universal-accounts directory and add the following variables:
+
+   ```bash
+   NEXT_PUBLIC_PROJECT_ID=""
+   NEXT_PUBLIC_CLIENT_KEY=""
+   NEXT_PUBLIC_APP_ID=""
    ```
 
 3. Run the development server:
@@ -73,7 +69,7 @@ app/
    - Account balances are retrieved and shown
 
 4. **Execute Transactions**
-   - Users can initiate a simple BNB purchase
+   - Users can initiate a simple USDT purchase
    - Transaction progress and results are clearly displayed
 
 ## Important Notes
@@ -85,6 +81,6 @@ app/
 
 ## Resources
 
-- [Particle Network Documentation](https://docs.particle.network)
-- [Universal Accounts Overview](https://docs.particle.network/overview/universal-accounts)
-- [Next.js Documentation](https://nextjs.org/docs)
+- [Particle Network Documentation](https://developers.particle.network/intro/introduction)
+- [Universal Accounts Overview](https://developers.particle.network/universal-accounts/cha/overview)
+

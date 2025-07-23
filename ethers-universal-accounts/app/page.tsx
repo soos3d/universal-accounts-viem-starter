@@ -96,16 +96,21 @@ export default function Home() {
    */
   useEffect(() => {
     if (walletAddress) {
-      if (!process.env.NEXT_PUBLIC_UA_PROJECT_ID) {
-        console.error("NEXT_PUBLIC_UA_PROJECT_ID is not configured");
+      if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
+        console.error("NEXT_PUBLIC_PROJECT_ID is not configured");
         return;
       }
 
       const ua = new UniversalAccount({
-        projectId: process.env.NEXT_PUBLIC_UA_PROJECT_ID,
+        projectId: process.env.NEXT_PUBLIC_PROJECT_ID!,
+        projectClientKey: process.env.NEXT_PUBLIC_CLIENT_KEY!,
+        projectAppUuid: process.env.NEXT_PUBLIC_APP_ID!,
         ownerAddress: walletAddress,
+        // If not set it will use auto-slippage
         tradeConfig: {
-          universalGas: false, // Don't use PARTI token for gas
+          slippageBps: 100, // 1% slippage tolerance
+          universalGas: true, // Prioritize PARTI token to pay for gas
+          //usePrimaryTokens: [SUPPORTED_TOKEN_TYPE.SOL], // Specify token to use as source (only for swaps)
         },
       });
 
