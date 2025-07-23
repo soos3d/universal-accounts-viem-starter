@@ -1,4 +1,4 @@
-import { IAssetsResponse } from "@GDdark/universal-account";
+import { IAssetsResponse } from "@particle-network/universal-account-sdk";
 import {
   Accordion,
   AccordionContent,
@@ -46,12 +46,9 @@ function getChainNameById(chainId: number): string {
     43114: "Avalanche",
     8453: "Base",
     59144: "Linea",
-    81457: "Blast",
     80094: "Berachain",
-    169: "Manta Pacific",
-    34443: "Mode",
+    999: "Hyper EVM",
     146: "Sonic",
-    1030: "Conflux eSpace",
     4200: "Merlin",
     101: "Solana",
   };
