@@ -3,7 +3,6 @@ import { IAssetsResponse } from "@particle-network/universal-account-sdk";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Portfolio } from "./Portfolio";
-import { Eye } from "lucide-react";
 
 interface AccountInfoProps {
   accountInfo: {

@@ -1,6 +1,8 @@
 # Universal Account Tutorial with Viem
 
-This tutorial demonstrates how to integrate Particle Network's Universal Accounts into your dApp using viem for wallet connection and transaction execution.
+This tutorial demonstrates how to integrate Particle Network's Universal Accounts into your dApp using viem for wallet connection. Universal Accounts provide a seamless cross-chain experience by abstracting away the complexity of managing multiple chain-specific accounts.
+
+> Find a full breakdown in the [Universal Account SDK Documentation](https://docs.particle.network/developers/universal-account-sdk).
 
 ## Features
 
@@ -11,13 +13,12 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
 
 2. **Universal Account Creation**
    - Initialize Universal Account with user's EOA
-   - Configure account settings including gas payment options
+   - Configure account settings
 
 3. **Account Information**
-   - View EVM smart account address
-   - View Solana smart account address
-   - Check unified token balances across chains
-   - Explore detailed portfolio breakdown
+   - View EVM Smart Account address
+   - View Solana Smart Account address
+   - Check account balances across chains
 
 4. **Universal Transactions**
    - Execute a simple USDT request on Avalanche
@@ -26,37 +27,33 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
 
 ## Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/soos3d/universal-accounts-viem-starter.git
-   cd universal-accounts-viem-starter/ethers-universal-accounts
-   ```
-
-2. Install dependencies:
+1. Install dependencies:
    ```bash
    npm install
    # or
    yarn
    ```
 
-3. Configure environment variables:
-   Create a `.env.local` file with your Particle Network credentials:
-   ```
-   NEXT_PUBLIC_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_CLIENT_KEY=your_client_key
-   NEXT_PUBLIC_APP_ID=your_app_id
-   ```
-   
-   > You can obtain these credentials by creating a project in the [Particle Network Dashboard](https://dashboard.particle.network/)
+2. Configure environment variables:
 
-4. Run the development server:
+   First, create a project in the [Particle Dashboard](https://dashboard.particle.network/) to get the required credentials.
+
+   Create a .env file in the root of the ethers-universal-accounts directory and add the following variables:
+
+   ```bash
+   NEXT_PUBLIC_PROJECT_ID=""
+   NEXT_PUBLIC_CLIENT_KEY=""
+   NEXT_PUBLIC_APP_ID=""
+   ```
+
+3. Run the development server:
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the demo.
+4. Open [http://localhost:3000](http://localhost:3000) to view the tutorial.
 
 ## Implementation Guide
 
@@ -90,8 +87,15 @@ This tutorial demonstrates how to integrate Particle Network's Universal Account
 - `app/components/AccountInfo.tsx` - Displays account addresses and balances
 - `app/components/Portfolio.tsx` - Shows detailed token breakdown by chain
 
-## Learn More
+## Important Notes
 
-- [Universal Account SDK Documentation](https://developers.particle.network/universal-accounts/cha/overview)
+- This is a testnet application
+- Make sure you have MetaMask installed
+- The app uses Particle Network's Universal Account SDK with viem for wallet connection
+- All transactions are simulated with small amounts
+
+## Resources
+
+- [Universal Account SDK Documentation](https://docs.particle.network/developers/universal-account-sdk)
 - [Viem Documentation](https://viem.sh/)
 - [Particle Network Dashboard](https://dashboard.particle.network/)
